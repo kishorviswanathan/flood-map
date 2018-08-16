@@ -53,7 +53,7 @@ function refreshTiles(){
 	    'source': 'custom-roads',
             'interactive': true,
             'paint': {
-                'line-color': 'rgba(255,5,230,1)',
+                'line-color': '#256d7b',
                 'line-width': 3,
                 'line-opacity': 1
             }
@@ -94,7 +94,12 @@ function addSourcesAndLayers() {
     refreshTiles();
     map.on('click', function(e) {
             if (map.getZoom() >= 15) {
-                var features = map.queryRenderedFeatures(e.point, {
+		var point = e.point;
+                var features = map.queryRenderedFeatures(
+		[
+		  [point.x - 20 / 2, point.y - 20 / 2],
+		  [point.x + 20 / 2, point.y + 20 / 2]
+		], {
                     radius: 5,
                     includeGeometry: true,
                     layers: ['selected-roads']
