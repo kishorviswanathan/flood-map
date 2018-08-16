@@ -11,7 +11,14 @@ var map = new mapboxgl.Map({
 map.on('style.load', function(e) {
 
     addSourcesAndLayers();
-
+    var location = new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    });
+    map.addControl(location);
+    setTimeout(function(){ location.trigger(); }, 3000);
 });
 
 function deleteRoad(features) {
@@ -53,7 +60,7 @@ function refreshTiles(){
 	    'source': 'custom-roads',
             'interactive': true,
             'paint': {
-                'line-color': '#256d7b',
+                'line-color': '#ff0000',
                 'line-width': 3,
                 'line-opacity': 1
             }
