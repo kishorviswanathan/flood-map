@@ -28,6 +28,12 @@ h1 {
   #sidebar {
     display: none;
   }
+  #menu{
+    display:block !important;
+  }
+  #sidebar h1{
+    margin-left: 45px;
+  }
 }
 
 @media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) #map {
@@ -56,4 +62,21 @@ h1 {
   border-radius: 50px;
   float: left;
   margin: 5px 7px 0 0;
+}
+
+#menu{
+  z-index:1000;
+  position:absolute;
+  width:35px;
+  margin: 10px;
+  display: none;
+  margin-top: 14px;
+}
+
+#copy {
+  display: none;
+}
+
+.visible{
+ display:block !important;
 }

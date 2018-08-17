@@ -124,7 +124,8 @@ function addSourcesAndLayers() {
                     }
                 }
             }else{
-		$("#copy").html("Zoom in to mark area as affected.");
+		$("#copy").addClass("visible");
+		setTimeout(function(){$("#copy").removeClass("visible");},5000);
 	    }
         });
 
@@ -158,6 +159,9 @@ $(function() {
                 $('#sidebar').css('overflow', 'auto');
             }
         }
+    });
+    $('#menu').on('click',function(){
+	$('#sidebar').toggleClass('visible');
     });
 });
 
