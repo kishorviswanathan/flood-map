@@ -22,19 +22,23 @@ map.on('style.load', function(e) {
     }));
     map.addControl(location);
     map.addControl(new mapboxgl.NavigationControl());
-    setTimeout(function(){ location.trigger(); }, 3000);
+    setTimeout(function(){ 
+	setInterval(function(){
+		$("#feature-count").text(map.queryRenderedFeatures({layers:['selected-roads']}).length);
+	},3000);
+	location.trigger();
+    }, 3000);
 });
 
 function deleteRoad(features) {
-    $('#map').toggleClass('loading');
+    $('#map').addClass('loading');
     var url = DATASETS_BASE + 'features/' + features[0].properties.id + '?access_token=' + DATASETS_ACCESS_TOKEN;
     $.ajax({
         method: 'DELETE',
         url: url,
         contentType: 'application/json',
         success: function() {
-            $('#map').toggleClass('loading');
-	    refreshTiles();
+	        refreshTiles();
         },
         error: function() {
             $('#map').toggleClass('loading');
@@ -43,37 +47,31 @@ function deleteRoad(features) {
 }
 
 function refreshTiles(){
-    var url = DATASETS_BASE + 'features';
-    var params = {
-        'access_token': DATASETS_ACCESS_TOKEN
-    };
-
-    $.getJSON(url+"?random="+new Date().getTime(), params, function(data) {
-	if(map.getSource('custom-roads')){
+    var url = DATASETS_BASE + 'features?access_token='+DATASETS_ACCESS_TOKEN;
+    if(map.getSource('custom-roads')){
 		map.removeLayer('selected-roads');
 		map.removeSource('custom-roads');
 	}
-        map.addSource('custom-roads', {
-            type: 'geojson',
-            data: data
-        });
-	$("#feature-count").text(data.features.length)
-        map.addLayer({
-            'id': 'selected-roads',
-            'type': 'line',
+	map.addSource('custom-roads', {
+	    type: 'geojson',
+	    data: url
+	});
+	map.addLayer({
+	    'id': 'selected-roads',
+	    'type': 'line',
 	    'source': 'custom-roads',
-            'interactive': true,
-            'paint': {
-                'line-color': '#ff0000',
-                'line-width': 3,
-                'line-opacity': 1
-            }
-        });
-   });
+	    'interactive': true,
+	    'paint': {
+		'line-color': '#ff0000',
+		'line-width': 3,
+		'line-opacity': 0.6
+	    }
+	});
+	$('#map').removeClass('loading');
 }
 
 function addRoad(features) {
-    $('#map').toggleClass('loading');
+    $('#map').addClass('loading');
     var tempObj = {
         type: 'Feature',
         geometry: features[0].geometry,
@@ -92,8 +90,7 @@ function addRoad(features) {
         dataType: 'json',
         contentType: 'application/json',
         success: function(response) {
-            $('#map').toggleClass('loading');
-	    refreshTiles();
+	        refreshTiles();
         },
         error: function() {
             $('#map').toggleClass('loading');
