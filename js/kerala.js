@@ -21,7 +21,7 @@ map.on('style.load', function(e) {
 	accessToken:PUBLIC_ACCESS_TOKEN
     }));
     map.addControl(location);
-    map.addControl(new mapboxgl.NavigationControl());
+    //map.addControl(new mapboxgl.NavigationControl());
     setTimeout(function(){ location.trigger(); }, 3000);
 });
 
@@ -105,12 +105,13 @@ function addSourcesAndLayers() {
     refreshTiles();
     map.on('click', function(e) {
             if (map.getZoom() >= 15) {
-		var point = e.point;
+		        var point = e.point;
+		        var region = [
+            		  [point.x - 20 / 2, point.y - 20 / 2],
+            		  [point.x + 20 / 2, point.y + 20 / 2]
+            		];
                 var features = map.queryRenderedFeatures(
-		[
-		  [point.x - 20 / 2, point.y - 20 / 2],
-		  [point.x + 20 / 2, point.y + 20 / 2]
-		], {
+            		region, {
                     radius: 5,
                     includeGeometry: true,
                     layers: ['selected-roads']
@@ -118,10 +119,10 @@ function addSourcesAndLayers() {
                 if (features.length) {
                     deleteRoad(features);
                 } else {
-                    var features = map.queryRenderedFeatures(e.point, {
+                    var features = map.queryRenderedFeatures(region, {
                         radius: 5,
                         includeGeometry: true,
-                        layers: ['road']
+                        layers: ['road','bridge']
                     });
                     if (features.length) {
                         addRoad(features);
