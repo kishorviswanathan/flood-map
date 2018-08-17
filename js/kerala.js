@@ -104,7 +104,7 @@ function addRoad(features) {
 function addSourcesAndLayers() {
     refreshTiles();
     map.on('click', function(e) {
-            if (map.getZoom() >= 15 && confirm("want to edit? if no click cancel")) {
+            if (map.getZoom() >= 15 && confirm("Are you sure ? Press ok to edit.")) {
 		        var point = e.point;
                 var features = map.queryRenderedFeatures(
             		[
