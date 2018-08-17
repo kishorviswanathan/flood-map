@@ -104,7 +104,7 @@ function addRoad(features) {
 function addSourcesAndLayers() {
     refreshTiles();
     map.on('click', function(e) {
-            if (map.getZoom() >= 15) {
+            if (map.getZoom() >= 15 && confirm("want to edit? if no click cancel")) {
 		        var point = e.point;
 		        var region = [
             		  [point.x - 20 / 2, point.y - 20 / 2],
