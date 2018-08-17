@@ -22,6 +22,7 @@ h1 {
 #sidebar {
   background-color: rgba(40, 53, 61, 0.94);
   overflow: hidden;
+  z-index:100;
 }
 
 @media only screen and (max-width: 620px) {
@@ -80,3 +81,4 @@ h1 {
 .visible{
  display:block !important;
 }
+

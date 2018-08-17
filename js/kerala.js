@@ -106,12 +106,11 @@ function addSourcesAndLayers() {
     map.on('click', function(e) {
             if (map.getZoom() >= 15) {
 		        var point = e.point;
-		        var region = [
+                var features = map.queryRenderedFeatures(
+            		[
             		  [point.x - 20 / 2, point.y - 20 / 2],
             		  [point.x + 20 / 2, point.y + 20 / 2]
-            		];
-                var features = map.queryRenderedFeatures(
-            		region, {
+            		], {
                     radius: 5,
                     includeGeometry: true,
                     layers: ['selected-roads']
@@ -119,7 +118,7 @@ function addSourcesAndLayers() {
                 if (features.length) {
                     deleteRoad(features);
                 } else {
-                    var features = map.queryRenderedFeatures(region, {
+                    var features = map.queryRenderedFeatures(point, {
                         radius: 5,
                         includeGeometry: true,
                         layers: ['road','bridge']
