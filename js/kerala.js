@@ -21,7 +21,7 @@ map.on('style.load', function(e) {
 	accessToken:PUBLIC_ACCESS_TOKEN
     }));
     map.addControl(location);
-    //map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.NavigationControl());
     setTimeout(function(){ location.trigger(); }, 3000);
 });
 
