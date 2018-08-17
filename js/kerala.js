@@ -104,8 +104,11 @@ function addRoad(features) {
 function addSourcesAndLayers() {
     refreshTiles();
     map.on('click', function(e) {
-            if (map.getZoom() >= 15 && confirm("Are you sure ? Press ok to edit.")) {
-		        var point = e.point;
+            if (map.getZoom() < 15) {
+		$("#copy").addClass("visible");
+		setTimeout(function(){$("#copy").removeClass("visible");},5000);
+            }else if (confirm("Are you sure ? Press ok to edit.")){
+		var point = e.point;
                 var features = map.queryRenderedFeatures(
             		[
             		  [point.x - 20 / 2, point.y - 20 / 2],
@@ -127,9 +130,6 @@ function addSourcesAndLayers() {
                         addRoad(features);
                     }
                 }
-            }else{
-		$("#copy").addClass("visible");
-		setTimeout(function(){$("#copy").removeClass("visible");},5000);
 	    }
         });
 
