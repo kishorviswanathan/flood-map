@@ -17,7 +17,11 @@ map.on('style.load', function(e) {
         },
         trackUserLocation: true
     });
+    map.addControl(new MapboxGeocoder({
+	accessToken:PUBLIC_ACCESS_TOKEN
+    }));
     map.addControl(location);
+    map.addControl(new mapboxgl.NavigationControl());
     setTimeout(function(){ location.trigger(); }, 3000);
 });
 
