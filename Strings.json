@@ -1,0 +1,82 @@
+{
+  "en": {
+    "menu_title": "Flood Map",
+    "menu_around_me": "Around Me",
+    "menu_flood_sim": {
+      "title": "Flooding Simulation",
+      "button_start": "Start Simulation",
+      "button_stop": "Stop Simulation",
+      "warn": "Warning: This simulation is only based on the elevation data. There are many other factors that affects flooding. Use only as a reference."
+    },
+
+    "menu_report":{
+      "title":"Report a Flooded Road",
+      "instr_1": "Zoom-In and Click or Tap a road to start marking.",
+      "instr_2": "Okay, Now keep marking along the flooded road.",
+      "button_start": "Start Marking",
+      "button_cancel": "Cancel",
+      "button_undo": "Undo",
+      "button_done": "Done",
+      "warn": "Warning : Please do not enter wrong or misleading information."
+    },
+
+    "menu_help":{
+      "title": "Help",
+      "link_1":{
+        "title": "Kerala Rescue",
+        "url": "www.keralarescue.in"
+      }
+    },
+
+    "menu_buttons":{
+      "bt_1":{
+        "title": "How to use Flood Map ?",
+        "url": "https://telegra.ph/How-to-use-the-Flood-Map-08-10"
+      },
+      "bt_2":{
+        "title": "Powered by MicroID",
+        "url": "https://www.microid.in/"
+      }
+    }
+  },
+  "ml" : {
+    "menu_title": "വെള്ളപ്പൊക്ക ഭൂപടം",
+    "menu_around_me": "എനിക്ക് ചുറ്റും",
+    "menu_flood_sim": {
+      "title": "പ്രളയ സിമുലേഷൻ",
+      "button_start": "സിമുലേഷൻ ആരംഭിക്കുക",
+      "button_stop": "സിമുലേഷൻ റദ്ദാക്കുക",
+      "warn": "മുന്നറിയിപ്പ്: എലവേഷൻ ഡാറ്റയെ അടിസ്ഥാനമാക്കിയുള്ളതാണ് ഈ സിമുലേഷൻ. വെള്ളപ്പൊക്കത്തെ ബാധിക്കുന്ന മറ്റ് നിരവധി ഘടകങ്ങളുണ്ട്. ഒരു റഫറൻസായി മാത്രം ഉപയോഗിക്കുക."
+    },
+
+    "menu_report":{
+      "title":"വെള്ളപ്പൊക്കമുള്ള റോഡ് റിപ്പോർട്ടു ചെയ്യുക",
+      "instr_1": "അടയാളപ്പെടുത്താൻ ആരംഭിക്കുന്നതിന് സൂം-ഇൻ ചെയ്ത് ഒരു റോഡിൽ ക്ലിക്കുചെയ്യുക അല്ലെങ്കിൽ ടാപ്പുചെയ്യുക.",
+      "instr_2": "ശരി, ഇപ്പോൾ വെള്ളപൊക്കം ഉള്ള റോഡിലൂടെ അടയാളപ്പെടുത്തുന്നത് തുടരുക",
+      "button_start": "അടയാളപ്പെടുത്തൽ ആരംഭിക്കുക",
+      "button_cancel": "റദ്ദാക്കുക",
+      "button_undo": "പഴയപടിയാക്കുക",
+      "button_done": "ചെയ്‌തു",
+      "warn": "മുന്നറിയിപ്പ്: ദയവായി തെറ്റായ അല്ലെങ്കിൽ തെറ്റിദ്ധരിപ്പിക്കുന്ന വിവരങ്ങൾ നൽകരുത്."
+    },
+
+    "menu_help":{
+      "title": "സഹായിക്കുക",
+      "link_1":{
+        "title": "കേരള റെസ്ക്യൂ",
+        "url": "www.keralarescue.in"
+      }
+    },
+
+    "menu_buttons":{
+      "bt_1":{
+        "title": "ഫ്ലഡ് മാപ്പ് എങ്ങനെ ഉപയോഗിക്കാം ?",
+        "url": "https://telegra.ph/%E0%B4%B5%E0%B4%B3%E0%B4%B3%E0%B4%AA%E0%B4%AA%E0%B4%95%E0%B4%95-%E0%B4%AD%E0%B4%AA%E0%B4%9F-%E0%B4%8E%E0%B4%99%E0%B4%99%E0%B4%A8-%E0%B4%89%E0%B4%AA%E0%B4%AF%E0%B4%97%E0%B4%95%E0%B4%95-08-11"
+      },
+      "bt_2":{
+        "title": "പ്രായോജകർ: MicroID",
+        "url": "https://www.microid.in/"
+      }
+    }
+  }
+}

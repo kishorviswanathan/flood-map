@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title data-translation="menu_title"></title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Mapbox -->
+    <link href="https://www.mapbox.com/base/latest/base.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+    <!-- Weather -->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css' rel='stylesheet' />
+    
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h2 data-translation="menu_title"></h2>
+            </div>
+
+            <ul class="list-unstyled components" id="menus">
+                <li>
+                    <a href="#nearSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" data-translation="menu_around_me"></a>
+                    <div class="collapse show" id="nearSubmenu" data-parent="#menus">
+                        <!-- Weather Chip -->
+                        <div class="chip" id="weather">
+                            <!-- Temperature Row -->
+                            <div class="row">
+                              <div class="col-4 text-center" id="weather-icon"></div>
+                              <div class="col-8">
+                                <div class="row"> 
+                                  <div class="col-12">
+                                    <h1 id="temp"></h1>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <h6 id="description"></h6>
+                                </div>
+                              </div>
+                            </div> <!-- end Temperature Row -->
+
+                            <!-- Date, Time and Place Row -->
+                            <div class="row">
+                              <div class="col text-center">
+                                <h3 id="place"></h3>
+                                <h3 id="dateTime"></h3>
+                              </div>
+                            </div> <!-- end Date, Time and Place Row -->
+
+                            <!-- Other Weather Details Row -->
+                            <div id="otherDetails" class="row">
+                              <div class="col text-center">
+                                <i class='wi wi-humidity' style='font-size: 2em'></i>
+                                <h4 id="humidity"></h4>
+                              </div>
+                              <div class="col text-center">
+                                <i class='wi wi-strong-wind' style='font-size: 2em'></i>
+                                <h4 id="windSpeed"></h4>
+                              </div>
+                              <div class="col text-center">
+                                <i class='wi wi-thermometer' style='font-size: 2em'></i>
+                                <h4 id="celsius"></h4>
+                              </div>
+                            </div> <!-- end Other Weather Details Row -->
+                        </div> <!-- end Weather Chip -->
+                    </div>
+                </li>
+                <li data-translation="menu_flood_sim">
+                    <a href="#floodSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" data-translation="title"></a>
+                    <div class="collapse" id="floodSubmenu" data-parent="#menus">
+                        <button class="btn col-md-12 btn-primary" onclick="showFlood()" id="showflood" data-translation="button_start"></button>
+                        <button class="btn col-md-12 btn-danger hidden" onclick="hideFlood()" id="hideflood" data-translation="button_stop"></button>
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="15" value="1" class="slider" id="waterLevel" onchange="updateWaterLevel(this.value)">
+                            <span id="waterLevelValue">1 Mtr</span>
+                        </div>
+                        <p class="warning" data-translation="warn"></p>
+                    </div>
+                </li>
+                <li data-translation="menu_report">
+                    <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" data-translation="title"></a>
+                    <div class="collapse" id="reportSubmenu" data-parent="#menus">
+                        <div class="row reportStep show" id="reportStep-0">
+                            <button class="btn col-md-12 btn-primary" onclick="startMarking()" data-translation="button_start"></button>
+                            <p class="warning" data-translation="warn"></p>
+                        </div>
+                        <div class="row reportStep" id="reportStep-1">
+                            <p class="warning" data-translation="instr_1"></p>
+                            <button class="btn col-md-12 btn-danger" onclick="stopMarking()" data-translation="button_cancel">Cancel</button>
+                        </div>
+                        <div class="row reportStep" id="reportStep-2">
+                            <p class="warning" data-translation="instr_2"></p>
+                            <button class="btn col-md-12 btn-success" onclick="reportMarking()" data-translation="button_done">Done</button>
+                            <button class="btn col-md-12 btn-warning" onclick="undoMarking()" data-translation="button_undo">Undo</button>
+                            <button class="btn col-md-12 btn-danger" onclick="stopMarking()" data-translation="button_cancel">Cancel</button>
+                        </div>
+                    </div>
+                </li>
+                <li data-translation="menu_help">
+                    <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" data-translation="title"></a>
+                    <ul class="collapse list-unstyled" id="helpSubmenu" data-parent="#menus">
+                        <li data-translation="link_1">
+                            <a href="" target="_blank" data-translation="title"></a>
+                        </li>
+                        <!--<li>
+                            <a href="#">District Help Centers</a>
+                        </li>-->
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs" data-translation="menu_buttons">
+                <li class="download" data-translation="bt_1">
+                    <a href="" target="_blank" class="article" data-translation="title"></a>
+                </li>
+                <li data-translation="bt_2">
+                    <a href="" target="_blank" class="download" data-translation="title"></a>
+                </li>
+            </ul>
+            <div class="text-center language">
+                <span onclick="changeLanguage('en')">English</span>|<span onclick="changeLanguage('ml')">മലയാളം</span>
+            </div>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div id='map'></div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="js/weather.js"></script>
+    <script type="text/javascript" src="js/translations.js"></script>
+    <script type="text/javascript" src="js/leaflet.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+            loadTranslations();
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124168150-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-124168150-1');
+    </script>
+</body>
+
+</html>
