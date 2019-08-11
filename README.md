@@ -1,4 +1,7 @@
 # Flood Map
+
+![](https://raw.githubusercontent.com/kishorv06/flood-map/V2.0/Animation.gif)
+
 This project aims to help people to find safer routes to travel during a flood. Users can mark and unmark flooded or unsafe roads on the map anonymously. A live version of this project can be found [here](https://www.microid.in/floodmap).
 
 Warning !! This project uses GeoLocation API and should be served from a secure origin.[See Here](https://stackoverflow.com/questions/37835805/http-sites-does-not-detect-the-location-in-chrome-issue).
